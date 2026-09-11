@@ -1,0 +1,16 @@
+En general, la complejidad teórica predijo bien el comportamiento
+general de estos algoritmos, pero no siempre el rendimiento real.
+\texttt{Sort} fue el más parejo entre tiempo y memoria, sin
+importar el tipo de entrada; Quick Sort con pivote determinista, en
+cambio, mostró justo su punto débil clásico: arreglos ya
+ordenados, hasta el punto de no terminar dentro del límite de tiempo,
+confirmando de la forma más directa posible su peor caso $O(n^2)$.
+Strassen sí rinde más que Naive, pero solo a partir de matrices
+razonablemente grandes ($n\geq 256$); para las chicas, su propia
+sobrecarga lo deja atrás. Si algo queda claro de este ejercicio es que
+la notación asintótica es un buen punto de partida, pero no reemplaza
+medir: el contexto de uso y las características concretas de los datos
+importan tanto como la complejidad "en el papel".
+En consecuencia, la elección de un algoritmo no debería basarse únicamente
+en su complejidad asintótica, sino también en las características de los datos, 
+el tamaño de la entrada y los costos asociados a su implementación.

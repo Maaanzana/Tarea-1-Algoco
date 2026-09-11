@@ -1,0 +1,17 @@
+Los experimentos corrieron en un equipo con procesador AMD Ryzen 5
+4600H (6 núcleos, 12 hilos, 2.6 GHz), 16 GB de RAM DDR4, Windows 11, GPU NVIDIA GeForce GTX 1650, y se compiló en MSYS2 MINGW64.
+El código se compiló con \texttt{g++} 16.1.0. El tiempo se midió con \texttt{chrono}; la memoria, con
+el pico histórico del \textit{Working Set} de Windows
+(\texttt{PeakWorkingSetSize}, vía \texttt{GetProcessMemoryInfo}), algo
+específico de esta plataforma, así que si alguien intenta replicar
+esto en Linux o macOS esa columna simplemente va a salir en cero.
+
+Para ordenamiento se generaron arreglos de tamaño $n=10^1,10^3,10^5,10^7$,
+en orden ascendente, descendente y aleatorio, con dominios $D_1=\{0,\dots,9\}$
+y $D_7=\{0,\dots,10^7\}$, 3 muestras por combinación. Para matrices,
+tamaños $n=2^4,2^6,2^8,2^{10}$, tipos densa/diagonal/dispersa, dominios
+$D_0=\{0,1\}$ y $D_{10}=\{0,\dots,9\}$, también 3 muestras. Todo se
+generó con semilla fija para poder repetir los experimentos. Además se
+puso un límite de 3 minutos por caso, porque sin eso Quick Sort con
+arreglos ya ordenados simplemente nunca termina (su peor caso
+$O(n^2)$, que de hecho se activó varias veces en las mediciones).

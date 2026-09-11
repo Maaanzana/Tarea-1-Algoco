@@ -1,0 +1,103 @@
+Los resultados de ordenamiento están en las \Cref{fig:sorting_time} y
+\Cref{fig:sorting_memory}, y los de multiplicación de matrices en las
+\Cref{fig:matrix_time} y \Cref{fig:matrix_memory}. Cada curva es un
+algoritmo, y los valores están promediados sobre todas las muestras,
+tipos y dominios,Para mantener el informe conciso, se presentan principalmente 
+los resúmenes generales. Los gráficos desglosados por tipo de entrada y dominio 
+se generaron igualmente y se encuentran disponibles en data/plots/.
+
+\subsection{Ordenamiento}
+
+Lo primero que salta en la \Cref{fig:sorting_time} es que
+\texttt{Sort} gana en prácticamente todos los tamaños, y Quick Sort presenta 
+un rendimiento cercano. mientras el arreglo no sea muy grande. El
+problema aparece en $n=10^7$: para arreglos ya ordenados (ascendentes o
+descendentes), Quick Sort simplemente no terminó dentro del límite de
+tiempo y esos casos quedaron marcados como omitidos (el detalle está en
+\texttt{quicksort\_omitidos.txt}). Con pivote determinista, este es
+justo el escenario que dispara el peor caso $O(n^2)$ de la teoría —y
+acá se ve de la forma más contundente posible: ni siquiera alcanza a
+correr.
+
+Merge Sort, en cambio, se porta bien en todos los tipos de entrada,
+siempre $O(n\log n)$, aunque un poco más lento que \texttt{Sort}
+por el costo de ir copiando datos durante la fusión. Patience Sort es
+el caso más raro de los cuatro: en teoría también es $O(n\log n)$, pero
+en la práctica queda notoriamente atrás, sobre todo con arreglos
+aleatorios, por todo el trabajo extra de mantener las pilas y fusionar
+con un heap de $k$ vías.
+
+En memoria (\Cref{fig:sorting_memory}) las diferencias son bastante
+claras: Merge Sort reserva un buffer del mismo tamaño que el arreglo
+($n\times\texttt{sizeof(int)}$ bytes), así que es el que más consume.
+\texttt{Sort} y Quick Sort ordenan \textit{in-place}, por lo que
+su memoria auxiliar es casi nula (más allá de la pila de recursión).
+Patience Sort queda en un punto intermedio (nada despreciable, pero
+lejos del extremo de Merge Sort) consistente con sus estructuras de
+pilas y el heap de fusión.
+
+\subsection{Multiplicación de matrices}
+
+En la \Cref{fig:matrix_time}, Naive crece cúbico como se espera:
+pendiente 3 en la escala log-log, sin sorpresas. Strassen
+($O(n^{2.807})$) muestra una pendiente algo menor a partir de $n=256$,
+lo que es consistente con su mejor complejidad asintótica. Pero para
+$n\leq 64$ pasa lo contrario: Naive es más rápido, porque las sumas y
+restas extra de Strassen en cada nivel de recursión pesan más que lo
+que se ahorra en multiplicaciones,un ejemplo bastante directo de que
+una mejor complejidad asintótica no siempre gana cuando la entrada es
+chica.
+
+En memoria (\Cref{fig:matrix_memory}) ambos terminan guardando algo
+parecido para la matriz resultado, pero Strassen necesita espacio extra
+para las submatrices que arma en cada nivel de recursión, y eso se nota
+más mientras más grande es $n$. Naive, al ser puramente iterativo, no requiere 
+estructuras auxiliares adicionales de tamaño superior al de las matrices, 
+por lo que su uso de memoria crece como \(O(n^2)\).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/sorting/data/plots/resumen_tiempo.png}
+    \caption{Tiempo de ejecución promedio de los algoritmos de ordenamiento en función de \( n \).}
+    \label{fig:sorting_time}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/sorting/data/plots/resumen_memoria.png}
+    \caption{Pico promedio del Working Set utilizado durante la ejecución de los algoritmos de ordenamiento.}
+    \label{fig:sorting_memory}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/matrix_multiplication/data/plots/resumen_tiempo.png}
+    \caption{Tiempo de ejecución promedio de los algoritmos de multiplicación de matrices.}
+    \label{fig:matrix_time}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../code/matrix_multiplication/data/plots/resumen_memoria.png}
+    \caption{Pico promedio del Working Set utilizado durante la ejecución de los algoritmos de multiplicación de matrices.}
+    \label{fig:matrix_memory}
+\end{figure}
+
+Vale la pena mencionar un par de cosas que no alcanzan a verse en estos
+cuatro gráficos resumen: Quick Sort resulta mucho más sensible al tipo
+de entrada que Merge Sort o \texttt{Sort} (que se mantienen
+estables sin importar si el arreglo viene ordenado, invertido o
+aleatorio); y en matrices, la ventaja de Strassen se nota más en
+matrices densas con dominio $D_{10}$, donde el costo extra de sumar y
+restar submatrices se diluye mejor. El umbral
+\texttt{STRASSEN\_THRESHOLD = 64} de la implementación (ver
+\texttt{strassen.cpp}) explica directamente por qué para $n\leq 64$ el
+comportamiento es idéntico al de Naive: por debajo de ese tamaño,
+Strassen \emph{es} Naive.
+
+En general, la complejidad teórica predice bastante bien el
+comportamiento asintótico, pero no cuenta toda la historia: la
+implementación concreta, cómo se maneja la memoria, la localidad de
+los datos y hasta el tamaño exacto de la entrada terminan siendo
+igual de importantes en la práctica, sobre todo en el rango de
+tamaños intermedios donde ninguna curva ha "despegado" todavía.

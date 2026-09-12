@@ -1,4 +1,6 @@
 # TAREA 1 INF221 2026-1
+Samantha Aguilera 202473627-2
+link del repositorio: https://github.com/Maaanzana/Tarea-1-Algoco
 
 ## Estructura del Repositorio
 

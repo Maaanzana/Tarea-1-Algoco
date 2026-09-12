@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.10)  11 SEP 2026 19:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.10)  11 SEP 2026 21:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2006,7 +2006,7 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 Here is how much of TeX's memory you used:
  56274 strings out of 467441
  1296452 string characters out of 5407591
- 2273543 words of memory out of 5000000
+ 2273544 words of memory out of 5000000
  84741 multiletter control sequences out of 15000+600000
  699723 words of font info for 106 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -2017,7 +2017,7 @@ r/fourier-ms.pfb><C:/Users/saman/AppData/Local/Programs/MiKTeX/fonts/type1/adob
 e/utopia/putb8a.pfb><C:/Users/saman/AppData/Local/Programs/MiKTeX/fonts/type1/a
 dobe/utopia/putr8a.pfb><C:/Users/saman/AppData/Local/Programs/MiKTeX/fonts/type
 1/adobe/utopia/putri8a.pfb>
-Output written on report.pdf (5 pages, 405670 bytes).
+Output written on report.pdf (5 pages, 404740 bytes).
 PDF statistics:
  148 PDF objects out of 1000 (max. 8388607)
  16 named destinations out of 1000 (max. 500000)

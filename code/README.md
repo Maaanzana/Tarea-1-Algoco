@@ -18,6 +18,7 @@ Requisitos
 - C++: compilador g++ (se usó la verisión 16.1.0).
 - Python: Python 3.8+ con las librerías numpy, pandas y matplotlib.
 - Make: GNU Make.
+- Latex: Actualizado y quiza poder ocuparlo en la terminal, sino con texstudio
 (para compilar todo se uso el MSYS2 MINGW64)
 
 Instrucciones de Uso

@@ -41,7 +41,7 @@ using Matrix = vector<vector<int>>;
 Matrix multiplyMatrices(const Matrix& A, const Matrix& B);
 
 // Tiempo maximo permitido por caso.
-constexpr unsigned long TIMEOUT_SECONDS = 1; //en realidad minutos
+constexpr unsigned long TIMEOUT_SECONDS = 3; //en realidad minutos
 constexpr unsigned long TIMEOUT_MILLISECONDS = TIMEOUT_SECONDS * 1000 * 60;
 
 namespace {

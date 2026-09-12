@@ -28,7 +28,7 @@ namespace fs = filesystem;
 void sortArray(vector<int>& arr);
 
 // Tiempo maximo permitido por txt
-constexpr unsigned long TIMEOUT_SECONDS = 1;
+constexpr unsigned long TIMEOUT_SECONDS = 3; //en realidad son minutos 
 constexpr unsigned long TIMEOUT_MILLISECONDS =
     TIMEOUT_SECONDS * 60 * 1000;
 
